@@ -1,4 +1,7 @@
 # okhttp-utils
+
+>由于个人原因，现已停止维护。
+
 对okhttp的封装类，okhttp见：[https://github.com/square/okhttp](https://github.com/square/okhttp).
 
 目前对应okhttp版本`3.3.1`.
@@ -8,12 +11,12 @@
 * Android Studio
 	
 	```
-	compile 'com.zhy:okhttputils:2.6.1'
+	compile 'com.zhy:okhttputils:2.6.2'
 	```
 	
 * Eclipse
 	
-	下载最新jar:[okhttputils-2\_6\_1.jar](okhttputils-2_6_1.jar?raw=true)
+	下载最新jar:[okhttputils-2\_6\_2.jar](okhttputils-2_6_2.jar?raw=true)
 
 	注：需要同时导入okhttp和okio的jar，下载见：[https://github.com/square/okhttp](https://github.com/square/okhttp).
 	
@@ -172,18 +175,19 @@ OkHttpUtils
 
 ```
 
-### Post String
+### Post JSON
 
 ```java
   OkHttpUtils
     .postString()
     .url(url)
     .content(new Gson().toJson(new User("zhy", "123")))
+     .mediaType(MediaType.parse("application/json; charset=utf-8"))
     .build()
     .execute(new MyStringCallback());
 ```
 
-提交一个Gson字符串到服务器端。
+提交一个Gson字符串到服务器端，注意：传递JSON的时候，不要通过addHeader去设置contentType，而使用`.mediaType(MediaType.parse("application/json; charset=utf-8"))`.。
 
 ### Post File
 
